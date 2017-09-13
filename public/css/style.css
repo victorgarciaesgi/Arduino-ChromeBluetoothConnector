@@ -1,0 +1,28 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+header {
+  flex: 0 0 auto;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  background-color: #fafafa;
+  box-shadow: 0 0 5px #c7c7c7;
+  padding: 5px 10px 5px 10px;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+}
+
+header img {
+  flex: 0 0 auto;
+}
+
+header span.title {
+  flex: 1 1 auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
