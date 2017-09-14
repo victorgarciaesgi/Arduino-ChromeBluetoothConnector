@@ -1,0 +1,55 @@
+<ng-form name='tokenForm'>
+<div class='legend' ng-if='$ctrl.vgData.legend'>{($ctrl.vgData.legend)}</div>
+<div class="input-form-wrap f-left h-auto w-100">
+  <input type="{($ctrl.vgData.type)}"
+          class='input-form'
+          placeholder="{($ctrl.vgData.placeholder)}"
+          ng-model='$ctrl.searchText'
+          ng-class='{
+            formError: (tokenForm[$ctrl.vgData.name].$invalid && tokenForm[$ctrl.vgData.name].$dirty),
+            formValid: (tokenForm[$ctrl.vgData.name].$valid && tokenForm[$ctrl.vgData.name].$dirty)
+          }'
+          ng-disabled='$ctrl.vgDisabled'
+          ng-keydown='$ctrl.keydown($event, $this)'
+          ng-trim="false"
+          ng-blur='$ctrl.displayResult = false'
+          ng-focus='$ctrl.displayResult = true'
+         />
+  <div class="input-form-result" ng-if='($ctrl.search_result.data.length > 0 || $ctrl.error) && $ctrl.searchText.length > 0 && $ctrl.displayResult'>
+    <ul ng-show='$ctrl.search_result.data.length > 0'>
+      <li ng-repeat='result in $ctrl.search_result.data'
+          ng-class='{selected: $ctrl.search_result.selected.indexList == $index}'
+          ng-mousedown='$ctrl.selectAction(result)' list>
+        {(result.name)}
+      </li>
+    </ul>
+    <ul ng-show='$ctrl.error'>
+      <div class="error_message">
+        {($ctrl.errorMessage)}
+      </div>
+    </ul>
+  </div>
+  <input type="hidden" class='input-form'
+        ng-model='$ctrl.filled'
+        name='{($ctrl.vgData.name)}'
+        ng-required='$ctrl.vgData.required'>
+
+  <div class="form-searching" ng-if='$ctrl.searching'><div class="loading-spinner"></div></div>
+  <div ng-if='tokenForm[$ctrl.vgData.name].$valid && tokenForm[$ctrl.vgData.name].$dirty && !$ctrl.searching && !$ctrl.search_result.data.length' class="form-valid-icon form-valid"></div>
+  <div ng-if='tokenForm[$ctrl.vgData.name].$invalid && tokenForm[$ctrl.vgData.name].$dirty && !$ctrl.searching && !$ctrl.search_result.data.length' class="form-valid-icon form-invalid"></div>
+  <div ng-if='tokenForm[$ctrl.vgData.name].$pristine && $ctrl.vgData.required && !$ctrl.searching' class="form-valid-icon form-required"></div>
+
+</div>
+<div class="errorMessage" ng-if='tokenForm[$ctrl.vgData.name].$invalid && tokenForm[$ctrl.vgData.name].$dirty'>
+   <span ng-if='tokenForm[$ctrl.vgData.name].$error[$ctrl.vgData.validator]'>{($ctrl.vgData.errors[$ctrl.vgData.validator])}</span>
+   <span ng-if='tokenForm[$ctrl.vgData.name].$error.required && $ctrl.vgData.errors.required'>{($ctrl.vgData.errors.required)}</span>
+</div>
+<div class="token-container">
+  <li ng-repeat='token in $ctrl.vgModel' class='token editable'>
+    <span>{(token.name)}</span>
+    <img class='t-u-delete' ng-click='$ctrl.delete($event,$index,token)' src='/assets/quit.svg' height='16' width= '16'>
+  </li>
+</div>
+
+<!-- <pre>{(tokenForm | json)}</pre> -->
+</ng-form>

@@ -4,7 +4,9 @@
   "description": "Mon Portefolio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc -p ./public",
+    "watch": "tsc -w -p ./public"
   },
   "repository": {
     "type": "git",
@@ -20,14 +22,20 @@
   },
   "homepage": "https://github.com/victorgarciaesgi/Portefolio-Victor#readme",
   "dependencies": {
+    "@types/angular": "^1.6.32",
+    "@types/moment": "^2.13.0",
     "angular-route": "^1.6.5",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "fs": "0.0.1-security",
     "md5": "^2.2.1",
+    "moment": "^2.18.1",
     "mustache-express": "^1.2.5",
     "mysql": "^2.13.0",
     "shortid": "^2.2.8",
     "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.2"
   }
 }

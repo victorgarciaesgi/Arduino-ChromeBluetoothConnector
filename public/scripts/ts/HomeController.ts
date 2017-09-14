@@ -1,19 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // PersonComponent.ts
-var AppController_1 = require("./AppController");
-var HomeController = /** @class */ (function () {
-    function HomeController() {
-    }
-    return HomeController;
-}());
-exports.HomeController = HomeController;
-AppController_1.MainApp.controller('PersonComponent', HomeController);
+import {MainApp} from './AppController';
+
+export class HomeController {
+    // . . .
+}
+
+MainApp.controller('PersonComponent', HomeController);
+
+
+
 // MainApp.controller('HomeController', function ($scope, $rootScope, $route, $routeParams, $location) {
+
 // 	let serviceUuid = 0xffe0;
 // 	let charUuid = 0xffe1;
 // 	let characteristic:any;
+
 // 	$scope.toggle = false;
+
+
 // 	$scope.Discover = {
 // 		selected: {},
 // 		getAll() {
@@ -39,10 +43,16 @@ AppController_1.MainApp.controller('PersonComponent', HomeController);
 // 	function write(cmd) {
 // 		characteristic.writeValue(cmd);
 // 	}
+
 // 	$scope.toggleLight = function() {
 // 		var cmd = new Uint8Array(1);
 // 		cmd[0] = $scope.toggle?1:0;
 // 		write(cmd);
 // 	}
+
+
+
+
+
+
 // });
-//# sourceMappingURL=HomeController.js.map

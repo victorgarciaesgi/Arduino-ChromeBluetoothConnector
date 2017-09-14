@@ -1,0 +1,45 @@
+<ng-form name='ratingForm'>
+<div class="input-form-wrap">
+  <div class="star-container" ng-mouseleave='$ctrl.leave()'>
+    <!-- <div ng-if='$ctrl.vgEditable' class="star-zero" ng-mouseenter="$ctrl.hover(0)" ng-click="$ctrl.set(0)"></div> -->
+    <div ng-if='$ctrl.vgEditable' class="starRating" editable
+        ng-class='{
+          full: $index < $ctrl.hoverCount,
+          half: $index == $ctrl.hoverCount - 0.5,
+          empty: $index >= $ctrl.hoverCount
+        }'
+        ng-repeat='star in $ctrl.getNumber($ctrl.count) track by $index'
+        color='{((!$ctrl.hoverStar && ratingForm[$ctrl.vgName].$dirty)?"green":"brown")}'>
+
+          <div class="part" ng-mouseenter="$ctrl.hover($index + 0.5)"
+          ng-click="$ctrl.set($index + 0.5)"></div>
+          <div class="part" ng-mouseenter="$ctrl.hover($index + 1)"
+          ng-click="$ctrl.set($index + 1)"></div>
+    </div>
+    <div ng-if='!$ctrl.vgEditable' class="starRating"
+        ng-class='{
+          full: $index + 1 <= $ctrl.hoverCount,
+          half: ($index + 1 > $ctrl.hoverCount) && ($index + 0.5 <= $ctrl.hoverCount),
+          empty: $index + 1 > $ctrl.hoverCount && ($index + 0.5 > $ctrl.hoverCount),
+        }'
+        ng-repeat='star in $ctrl.getNumber($ctrl.count) track by $index'
+        color='brown'>
+    </div>
+    <!-- <div ng-if='$ctrl.vgEditable' class="star-zero"></div> -->
+
+    <div class="star-displayNumber" ng-if='$ctrl.vgDisplaynote'>
+      {( ($ctrl.hoverCount != 0?($ctrl.hoverCount | number : 1 ):'-') )} / {($ctrl.count)}
+    </div>
+    <div class="star-displayCount" ng-if='$ctrl.vgDisplaynote && $ctrl.vgCount'>
+      {($ctrl.vgCount)} {($ctrl.vgCount > 1?'notes':'note')}
+    </div>
+  </div>
+  <input type="hidden" name='{($ctrl.vgName)}' ng-required='$ctrl.vgRequired'
+        ng-model='$ctrl.filled'>
+  <div ng-if='ratingForm[$ctrl.vgName].$pristine && !$ctrl.vgDisplaynote' class="form-valid-icon form-required"></div>
+  <div ng-if='ratingForm[$ctrl.vgName].$valid && ratingForm[$ctrl.vgName].$dirty && !$ctrl.vgDisplaynote' class="form-valid-icon form-valid"></div>
+  <div ng-if='ratingForm[$ctrl.vgName].$invalid && ratingForm[$ctrl.vgName].$dirty && !$ctrl.vgDisplaynote' class="form-valid-icon form-invalid"></div>
+</div>
+<!-- <pre>{($ctrl.hoverCount | json)}</pre>
+<pre>{(ratingForm.rating | json)}</pre> -->
+</ng-form>
