@@ -1,6 +1,5 @@
-'use strict'
 
-var map = {
+let map = {
   required: 'Ce champs est obligatoire',
   linkImage: {
     link: 'Le lien de l\'illustration doit être valide',
@@ -89,10 +88,10 @@ class ratingForm{
   public name:string;
   public required:boolean;
   public source:string;
-  public editable: string;
+  public editable: boolean;
   public init: string;
 
-  constructor(name, required, init, editable){
+  constructor(name:string, required: boolean, init:string, editable:boolean){
     this.name = name;
     this.editable = editable;
     this.required = required;
@@ -111,7 +110,7 @@ class dateBetweenForm{
   public validator: string;
   public errors: string[];
 
-  constructor(startName, endName, legend1, legend2, required, error, errorMessage){
+  constructor(startName: string, endName: string, legend1: string, legend2: string, required: boolean, error:boolean, errorMessage: string){
     this.startName = startName;
     this.endName = endName;
     this.legend1 = legend1;
@@ -132,7 +131,7 @@ class Notif{
   public message: string;
   public date: Date;
   
-  constructor(type, message, date){
+  constructor(type: string, message: string, date: Date){
     this.type = type;
     this.message = message;
     this.date = date;

@@ -15,7 +15,7 @@ MainApp.component('areaForm', {
   templateUrl: '../../components/Area-form.html',
   controller: function($scope, $element, $attrs){
     var ctrl = this;
-    $scope.$watch('$ctrl.vgModel',(newValue, oldValue, scope) => {
+    $scope.$watch('$ctrl.vgModel',(newValue: any, oldValue: any, scope: any) => {
       if (!!newValue) {
         scope.areaForm[ctrl.vgName].$setDirty();
       }
@@ -37,7 +37,7 @@ MainApp.component('textForm', {
   templateUrl: '../../components/Text-form.html',
   controller: function($scope, $element, $attrs){
     var ctrl = this;
-    $scope.$watch('$ctrl.vgModel',(newValue, oldValue, scope) => {
+    $scope.$watch('$ctrl.vgModel',(newValue: any, oldValue: any, scope: any) => {
       if (!!newValue) {
         scope.textForm[ctrl.vgName].$setDirty();
       }
@@ -83,7 +83,7 @@ MainApp.component('searchForm', {
       // }
     };
 
-    ctrl.keydown = (event, element) => {
+    ctrl.keydown = (event: any, element: any) => {
       if (event.which == 13) {event.preventDefault();}
       var model = ctrl.vgModel?ctrl.vgModel:"";
       if (!ctrl.searching && (model.length > 1 || ctrl.searchText.length > 0) && (model != undefined || ctrl.searchText != undefined)){
@@ -113,7 +113,7 @@ MainApp.component('searchForm', {
       }
     }
 
-    ctrl.selectAction = (book) => {
+    ctrl.selectAction = (book: any) => {
       if (ctrl.vgOnlySelect) {
         ctrl.searchText = book.name?book.name:book.username;
         ctrl.vgModel = book;
@@ -129,9 +129,9 @@ MainApp.component('searchForm', {
       }
     }
 
-    ctrl.search = (source, value) => {
+    ctrl.search = (source: string, value: string) => {
       ctrl.error = false;
-      AjaxRequest.get(source, value.replace(/ /g,'%20')).then((result) => {
+      AjaxRequest.get(source, value.replace(/ /g,'%20')).then((result: any) => {
         if (result.error){
           ctrl.searching = false;
           ctrl.search_result.reset();
@@ -145,13 +145,13 @@ MainApp.component('searchForm', {
           ctrl.search_result.selected["indexList"] = 0;
         }
       },
-        (error) => {
+        (error: any) => {
           ctrl.searching = false;
           ctrl.search_result.reset();
         })
     }
 
-    $scope.$watch('$ctrl.vgModel',(newValue, oldValue, scope) => {
+    $scope.$watch('$ctrl.vgModel',(newValue:any, oldValue:any, scope:any) => {
       if (!ctrl.vgOnlySelect) {
         if (!!newValue){
           if (newValue.trim().length > 1 && !ctrl.selectBook){
@@ -180,7 +180,7 @@ MainApp.component('searchForm', {
         }
       }
     })
-    $scope.$watch('$ctrl.searchText',(newValue, oldValue, scope) => {
+    $scope.$watch('$ctrl.searchText',(newValue:any, oldValue:any, scope:any) => {
       if (ctrl.vgOnlySelect) {
         if (!!newValue){
           if (newValue.trim().length > 0 && !ctrl.selectBook){
@@ -241,9 +241,9 @@ MainApp.component('tokenForm', {
       }
     };
 
-    ctrl.search = (source, value) => {
+    ctrl.search = (source:string, value:string) => {
       ctrl.error = false;
-      AjaxRequest.get(source, value).then((result) => {
+      AjaxRequest.get(source, value).then((result: any) => {
         if (result.error){
           ctrl.searching = false;
           ctrl.search_result.reset();
@@ -253,7 +253,7 @@ MainApp.component('tokenForm', {
         }
         else if(result.length > 0){
           ctrl.searching = false;
-          var newResult = result.filter((element) => ctrl.vgModel.findIndex((elem) => elem.idCategory == element.idCategory) == -1);
+          var newResult = result.filter((element:any) => ctrl.vgModel.findIndex((elem:any) => elem.idCategory == element.idCategory) == -1);
 
           if (newResult.length > 0){
             ctrl.search_result.data = newResult;

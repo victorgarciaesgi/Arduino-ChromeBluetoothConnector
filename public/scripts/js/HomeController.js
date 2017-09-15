@@ -1,48 +1,28 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-// PersonComponent.ts
-var AppController_1 = require("./AppController");
-var HomeController = /** @class */ (function () {
-    function HomeController() {
+class HomeController {
+    constructor($scope) {
+        this.$scope = $scope;
+        this.serviceUuid = 0xffe0;
+        this.charUuid = 0xffe1;
+        this.toggle = false;
+        $scope = this;
     }
-    return HomeController;
-}());
-exports.HomeController = HomeController;
-AppController_1.MainApp.controller('PersonComponent', HomeController);
-// MainApp.controller('HomeController', function ($scope, $rootScope, $route, $routeParams, $location) {
-// 	let serviceUuid = 0xffe0;
-// 	let charUuid = 0xffe1;
-// 	let characteristic:any;
-// 	$scope.toggle = false;
-// 	$scope.Discover = {
-// 		selected: {},
-// 		getAll() {
-//       navigator.bluetooth.requestDevice({filters: [{namePrefix: 'SH',}],optionalServices: [serviceUuid]})
-//       .then(function(device) {
-// 				console.log(device)
-//         return device.gatt.connect();
-//       })
-//       .then(function(server) {
-// 				console.log(server)
-//         return server.getPrimaryService(serviceUuid);
-//       })
-//       .then(function(service) {
-// 				console.log(service);
-//         return service.getCharacteristic(charUuid);
-//       })
-//       .then(function(char) {
-// 				console.log(char);
-//         characteristic = char;
-//       });
-//     }
-// 	};
-// 	function write(cmd) {
-// 		characteristic.writeValue(cmd);
-// 	}
-// 	$scope.toggleLight = function() {
-// 		var cmd = new Uint8Array(1);
-// 		cmd[0] = $scope.toggle?1:0;
-// 		write(cmd);
-// 	}
-// });
+    searchDevices() {
+        navigator.bluetooth.requestDevice({ filters: [{ namePrefix: 'SH', }], optionalServices: [this.serviceUuid] })
+            .then(device => { console.log(device); return device.gatt.connect(); })
+            .then(server => { console.log(server); return server.getPrimaryService(this.serviceUuid); })
+            .then(service => { console.log(service); return service.getCharacteristic(this.charUuid); })
+            .then(char => { console.log(char); this.Arduino = char; });
+    }
+    sendToDevice(value) {
+        this.Arduino.writeValue(value);
+    }
+    toggleLight() {
+        console.log('toggle');
+        let cmd = new Uint8Array(1);
+        cmd[0] = this.toggle ? 1 : 0;
+        this.sendToDevice(cmd);
+    }
+}
+HomeController.$inject = ['$scope', '$rootScope'];
+MainApp.controller('HomeController', HomeController);
 //# sourceMappingURL=HomeController.js.map

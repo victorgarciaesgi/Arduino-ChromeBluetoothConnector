@@ -1,10 +1,10 @@
-MainApp.factory('AjaxRequest', function ($http) {
-    var get = function (route, querry) {
+MainApp.factory('AjaxRequest', ($http) => {
+    let get = (route, querry) => {
         return $http({
-            url: Routing.generate(route),
+            url: route,
             method: "POST",
             data: { data: querry }
-        }).then(function (result) {
+        }).then((result) => {
             var data = result.data;
             try {
                 var returnData = JSON.parse(data);
@@ -20,13 +20,13 @@ MainApp.factory('AjaxRequest', function ($http) {
     };
 });
 MainApp.factory('PromiseImage', function ($q) {
-    var load = function (ImgLink) {
-        return $q(function (resolve, reject) {
+    let load = (ImgLink) => {
+        return $q((resolve, reject) => {
             var img = new Image();
-            img.onload = function (event) {
+            img.onload = (event) => {
                 resolve(img);
             };
-            img.onerror = function () {
+            img.onerror = () => {
                 reject(false);
             };
             img.src = ImgLink;

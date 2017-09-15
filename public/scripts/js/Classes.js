@@ -1,5 +1,4 @@
-'use strict';
-var map = {
+let map = {
     required: 'Ce champs est obligatoire',
     linkImage: {
         link: 'Le lien de l\'illustration doit être valide',
@@ -22,8 +21,8 @@ var map = {
         end: 'La date de fin doit être après la date de début'
     },
 };
-var textForm = /** @class */ (function () {
-    function textForm(placeholder, name, type, required, legend, source, init, validator, error, errorMessage) {
+class textForm {
+    constructor(placeholder, name, type, required, legend, source, init, validator, error, errorMessage) {
         this.placeholder = placeholder;
         this.name = name;
         this.type = type;
@@ -50,10 +49,9 @@ var textForm = /** @class */ (function () {
             }
         }
     }
-    return textForm;
-}());
-var searchForm = /** @class */ (function () {
-    function searchForm(placeholder, name, required, legend, source, validator, error, errorMessage) {
+}
+class searchForm {
+    constructor(placeholder, name, required, legend, source, validator, error, errorMessage) {
         this.placeholder = placeholder;
         this.name = name;
         this.required = required;
@@ -76,10 +74,9 @@ var searchForm = /** @class */ (function () {
             }
         }
     }
-    return searchForm;
-}());
-var ratingForm = /** @class */ (function () {
-    function ratingForm(name, required, init, editable) {
+}
+class ratingForm {
+    constructor(name, required, init, editable) {
         this.name = name;
         this.editable = editable;
         this.required = required;
@@ -87,10 +84,9 @@ var ratingForm = /** @class */ (function () {
             this.init = init;
         }
     }
-    return ratingForm;
-}());
-var dateBetweenForm = /** @class */ (function () {
-    function dateBetweenForm(startName, endName, legend1, legend2, required, error, errorMessage) {
+}
+class dateBetweenForm {
+    constructor(startName, endName, legend1, legend2, required, error, errorMessage) {
         this.startName = startName;
         this.endName = endName;
         this.legend1 = legend1;
@@ -105,14 +101,12 @@ var dateBetweenForm = /** @class */ (function () {
             }
         }
     }
-    return dateBetweenForm;
-}());
-var Notif = /** @class */ (function () {
-    function Notif(type, message, date) {
+}
+class Notif {
+    constructor(type, message, date) {
         this.type = type;
         this.message = message;
         this.date = date;
     }
-    return Notif;
-}());
+}
 //# sourceMappingURL=Classes.js.map

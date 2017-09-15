@@ -12,7 +12,7 @@ MainApp.component('areaForm', {
     templateUrl: '../../components/Area-form.html',
     controller: function ($scope, $element, $attrs) {
         var ctrl = this;
-        $scope.$watch('$ctrl.vgModel', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModel', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 scope.areaForm[ctrl.vgName].$setDirty();
             }
@@ -32,7 +32,7 @@ MainApp.component('textForm', {
     templateUrl: '../../components/Text-form.html',
     controller: function ($scope, $element, $attrs) {
         var ctrl = this;
-        $scope.$watch('$ctrl.vgModel', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModel', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 scope.textForm[ctrl.vgName].$setDirty();
             }
@@ -70,13 +70,13 @@ MainApp.component('searchForm', {
                 }
             };
         };
-        ctrl.$onInit = function () {
+        ctrl.$onInit = () => {
             ctrl.init();
             // if (!ctrl.vgModel && ctrl.vgOnlySelect){
             //   ctrl.vgModel = {};
             // }
         };
-        ctrl.keydown = function (event, element) {
+        ctrl.keydown = (event, element) => {
             if (event.which == 13) {
                 event.preventDefault();
             }
@@ -107,7 +107,7 @@ MainApp.component('searchForm', {
                 ctrl.displayResult = true;
             }
         };
-        ctrl.selectAction = function (book) {
+        ctrl.selectAction = (book) => {
             if (ctrl.vgOnlySelect) {
                 ctrl.searchText = book.name ? book.name : book.username;
                 ctrl.vgModel = book;
@@ -122,9 +122,9 @@ MainApp.component('searchForm', {
                 ctrl.selectBook = true;
             }
         };
-        ctrl.search = function (source, value) {
+        ctrl.search = (source, value) => {
             ctrl.error = false;
-            AjaxRequest.get(source, value.replace(/ /g, '%20')).then(function (result) {
+            AjaxRequest.get(source, value.replace(/ /g, '%20')).then((result) => {
                 if (result.error) {
                     ctrl.searching = false;
                     ctrl.search_result.reset();
@@ -137,12 +137,12 @@ MainApp.component('searchForm', {
                     ctrl.search_result.selected = result[0];
                     ctrl.search_result.selected["indexList"] = 0;
                 }
-            }, function (error) {
+            }, (error) => {
                 ctrl.searching = false;
                 ctrl.search_result.reset();
             });
         };
-        $scope.$watch('$ctrl.vgModel', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModel', (newValue, oldValue, scope) => {
             if (!ctrl.vgOnlySelect) {
                 if (!!newValue) {
                     if (newValue.trim().length > 1 && !ctrl.selectBook) {
@@ -171,7 +171,7 @@ MainApp.component('searchForm', {
                 }
             }
         });
-        $scope.$watch('$ctrl.searchText', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.searchText', (newValue, oldValue, scope) => {
             if (ctrl.vgOnlySelect) {
                 if (!!newValue) {
                     if (newValue.trim().length > 0 && !ctrl.selectBook) {
@@ -218,21 +218,21 @@ MainApp.component('tokenForm', {
             this.search_result = {
                 selected: {},
                 data: {},
-                reset: function () {
+                reset() {
                     this.selected = {};
                     this.data = {};
                 }
             };
         };
-        ctrl.$onInit = function () {
+        ctrl.$onInit = () => {
             ctrl.init();
             if (!ctrl.vgModel) {
                 ctrl.vgModel = [];
             }
         };
-        ctrl.search = function (source, value) {
+        ctrl.search = (source, value) => {
             ctrl.error = false;
-            AjaxRequest.get(source, value).then(function (result) {
+            AjaxRequest.get(source, value).then((result) => {
                 if (result.error) {
                     ctrl.searching = false;
                     ctrl.search_result.reset();
@@ -242,7 +242,7 @@ MainApp.component('tokenForm', {
                 }
                 else if (result.length > 0) {
                     ctrl.searching = false;
-                    var newResult = result.filter(function (element) { return ctrl.vgModel.findIndex(function (elem) { return elem.idCategory == element.idCategory; }) == -1; });
+                    var newResult = result.filter((element) => ctrl.vgModel.findIndex((elem) => elem.idCategory == element.idCategory) == -1);
                     if (newResult.length > 0) {
                         ctrl.search_result.data = newResult;
                         ctrl.search_result.selected = newResult[0];
@@ -255,21 +255,21 @@ MainApp.component('tokenForm', {
                         ctrl.errorMessage = 'Aucun résultat';
                     }
                 }
-            }, function (error) {
+            }, (error) => {
                 console.log(error);
                 ctrl.searching = false;
                 ctrl.search_result.reset();
             });
         };
-        ctrl.selectAction = function (category) {
-            if (ctrl.vgModel.findIndex(function (element) { return element.idCategory == category.idCategory; }) == -1) {
+        ctrl.selectAction = (category) => {
+            if (ctrl.vgModel.findIndex((element) => element.idCategory == category.idCategory) == -1) {
                 ctrl.search_result.reset();
                 ctrl.vgModel.push({ name: category.name, idCategory: category.idCategory });
                 ctrl.searchText = "";
                 ctrl.selectToken = true;
             }
         };
-        ctrl.keydown = function (event, element) {
+        ctrl.keydown = (event, element) => {
             if (event.which == 13) {
                 event.preventDefault();
             }
@@ -295,10 +295,10 @@ MainApp.component('tokenForm', {
                 }
             }
         };
-        ctrl.delete = function (event, index, token) {
+        ctrl.delete = (event, index, token) => {
             ctrl.vgModel.splice(index, 1);
         };
-        $scope.$watch('$ctrl.vgModel', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModel', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 if ($scope.tokenForm[ctrl.vgData.name].$pristine && newValue.length > 0) {
                     $scope.tokenForm[ctrl.vgData.name].$setDirty();
@@ -313,7 +313,7 @@ MainApp.component('tokenForm', {
                 ctrl.vgModel = [];
             }
         }, true);
-        $scope.$watch('$ctrl.searchText', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.searchText', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 if (newValue.trim().length > 0) {
                     ctrl.searching = true;
@@ -351,7 +351,7 @@ MainApp.component('ratingForm', {
         ctrl.filled = ""; // Placeholder qui rempli le champs input hidden
         ctrl.rating = 0; // Alternive variable pour garder la valeur d'avant lors d'un hover
         ctrl.hoverCount = 0; // Valeur de la note affichée
-        ctrl.$onInit = function () {
+        ctrl.$onInit = () => {
             if (!ctrl.vgModel) {
                 ctrl.vgModel = (ctrl.vgInit ? ctrl.vgInit : 0);
                 ctrl.hoverCount = (ctrl.vgInit ? ctrl.vgInit : 0);
@@ -360,20 +360,20 @@ MainApp.component('ratingForm', {
                 ctrl.hoverCount = ctrl.vgModel;
             }
         }; // Initialisation du composant
-        ctrl.getNumber = function (num) { return new Array(num); };
-        ctrl.hover = function (value) {
+        ctrl.getNumber = (num) => { return new Array(num); };
+        ctrl.hover = (value) => {
             if (ctrl.vgEditable) {
                 ctrl.hoverStar = true;
                 ctrl.hoverCount = value;
             }
         };
-        ctrl.leave = function () {
+        ctrl.leave = () => {
             if (ctrl.vgEditable) {
                 ctrl.hoverStar = false;
                 ctrl.hoverCount = ($scope.ratingForm[ctrl.vgName].$dirty ? ctrl.rating : ctrl.vgInit);
             }
         };
-        ctrl.set = function (value) {
+        ctrl.set = (value) => {
             if (ctrl.vgEditable) {
                 ctrl.hoverStar = false;
                 ctrl.vgModel = value;
@@ -381,7 +381,7 @@ MainApp.component('ratingForm', {
                 ctrl.onSelectResult({ note: value });
             }
         };
-        $scope.$watch('$ctrl.vgModel', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModel', (newValue, oldValue, scope) => {
             if (ctrl.vgEditable) {
                 if (!!newValue) {
                     if ($scope.ratingForm[ctrl.vgName].$pristine) {
@@ -395,7 +395,7 @@ MainApp.component('ratingForm', {
                 }
             }
         }, true);
-        $scope.$watch('$ctrl.vgInit', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgInit', (newValue, oldValue, scope) => {
             if (!ctrl.vgEditable) {
                 ctrl.hoverCount = (!!newValue ? newValue : 0);
             }
@@ -422,7 +422,7 @@ MainApp.component('dateBetweenForm', {
             ctrl.vgModelStart = new Date(date.setDate(date.getDate() + 1));
             ctrl.vgModelEnd = new Date(date.setDate(date.getDate() + 2));
         };
-        $scope.$watch('$ctrl.vgModelStart', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModelStart', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 scope.dateForm1[ctrl.vgData.startName].$setDirty();
             }
@@ -430,12 +430,12 @@ MainApp.component('dateBetweenForm', {
                 ctrl.$onInit();
             }
         }, true);
-        $scope.$watch('$ctrl.vgModelStartTime', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModelStartTime', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 scope.dateForm1['startTime'].$setDirty();
             }
         }, true);
-        $scope.$watch('$ctrl.vgModelEnd', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModelEnd', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 scope.dateForm2[ctrl.vgData.endName].$setDirty();
             }
@@ -443,7 +443,7 @@ MainApp.component('dateBetweenForm', {
                 ctrl.$onInit();
             }
         }, true);
-        $scope.$watch('$ctrl.vgModelEndTime', function (newValue, oldValue, scope) {
+        $scope.$watch('$ctrl.vgModelEndTime', (newValue, oldValue, scope) => {
             if (!!newValue) {
                 scope.dateForm2['endTime'].$setDirty();
             }

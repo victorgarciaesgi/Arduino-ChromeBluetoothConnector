@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='mainApp'>
+  <head>
+    <base href="/">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>Arduino Connector</title>
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <script type="text/javascript" src='/scripts/librairies/jquery.min.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/angular.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/angular-animate.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/angular-route.js'></script>
+    <script type='text/javascript' src='/scripts/librairies/ngTouch.min.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/socketio.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/moment.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/angular-moment.js'></script>
+    <script type="text/javascript" src='/scripts/librairies/moment-fr.js'></script>
+    <script> var exports = {};</script>
+
+    <script type="text/javascript" src='/scripts/js/Functions.js'></script>
+    <script type="text/javascript" src='/scripts/js/AppController.js'></script>
+    <script type="text/javascript" src='/scripts/js/HomeController.js'></script>
+    <script type="text/javascript" src='/scripts/js/Router.js'></script>
+    <script type="text/javascript" src='/scripts/js/Components.js'></script>
+    <script type="text/javascript" src='/scripts/js/Factories.js'></script>
+    <script type="text/javascript" src='/scripts/js/Directives.js'></script>
+    
+    <link href="/css/tools.min.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
+
+
+  </head>
+  <body>
+    <header>
+      <img ng-show='' src="/icons/back.svg" alt="" ng-touchstart=''>
+      <span class='title'>Hello</span>
+    </header>
+
+    <ng-view></ng-view>
+
+
+    
+  </body>
+</html>

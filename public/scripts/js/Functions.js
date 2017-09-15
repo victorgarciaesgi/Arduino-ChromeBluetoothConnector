@@ -38,7 +38,7 @@ function loremIpsum(maxSize) {
     var maxWordCount = maxSize;
     var randy = Math.floor(Math.random() * (maxWordCount - minWordCount)) + minWordCount;
     var ret = "";
-    for (i = 0; i < randy; i++) {
+    for (var i = 0; i < randy; i++) {
         var newTxt = loremIpsumWordBank[Math.floor(Math.random() * (loremIpsumWordBank.length - 1))];
         if (ret.substring(ret.length - 1, ret.length) == "." || ret.substring(ret.length - 1, ret.length) == "?") {
             newTxt = newTxt.substring(0, 1).toUpperCase() + newTxt.substring(1, newTxt.length);
