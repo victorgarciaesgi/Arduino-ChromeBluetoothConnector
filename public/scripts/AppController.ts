@@ -1,30 +1,31 @@
 import * as I from './Interfaces';
+var MainApp: ng.IModule;
+MainApp = angular.module('mainApp',  ['ngRoute','ngTouch','ngAnimate'])
 
-var MainApp: ng.IModule = angular.module('mainApp',  ['ngRoute','ngTouch','ngAnimate'])
 
-function Runner($rootScope: any, $timeout: ng.ITimeoutService){
-  console.log('salut');
-  $rootScope.Alerts = {
-    count: 0,
-    list: [],
-    delete(alert: I.Alert){
-      var index = this.list.findIndex((element: I.Alert) => element.id == alert.id);
-      this.list.splice(index, 1);
-    },
-    add(type: string, message: string){
-      var alert: I.Alert = {
-        id: this.count,
-        type: type,
-        message: message,
+class Runner{
+
+  static $inject = ['$rootScope','$timeout'];
+
+  constructor($rootScope: I.rootAlert, $timeout: ng.ITimeoutService){
+
+    $rootScope.Alerts = {
+      count: 0,list: [],
+      delete(alert){
+        let index = this.list.findIndex((element: I.Alert) => element.id == alert.id);
+        this.list.splice(index, 1);
+      },
+      add(type, message){
+        let alert: I.Alert = {id: this.count,type: type,message: message}
+        this.count++;
+        this.list.push(alert);
+        console.log(this.list);
+        $timeout(() => {this.delete(alert);},3000)
       }
-      this.count++;
-      this.list.push(alert);
-      $timeout(() => {
-        this.delete(alert);
-      },3000)
     }
   }
-}
 
+  
+}
 
 MainApp.run(Runner);

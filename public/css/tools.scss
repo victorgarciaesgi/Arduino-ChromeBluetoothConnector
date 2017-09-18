@@ -14,14 +14,73 @@ body {
   margin: 0;
   padding: 0;
   font-family: $mainFont, sans-serif;
-  color: $g60;
+  color: $g80;
   box-sizing: border-box;
-  background-color: white;
+  background-color: $w245;
   overflow-x: hidden;
   display: flex;
   flex-flow: column wrap;
   -webkit-font-smoothing: antialiased;
 }
+
+
+ul#alertsContainer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  width: 350px;
+  height: auto;
+  z-index: 2005;
+  display: flex;
+  flex-direction: column-reverse;
+
+  li{
+    position: relative;
+    height: auto;
+    width: 100%;
+    margin-top: 5px;
+    padding: 15px 10px 15px 50px;
+    box-shadow: 0 0 10px rgba(20,20,20,0.2);
+    font-size: 14px;
+    color: $w250;
+    text-align: center;
+    align-content: center;
+    border-radius: 3px;
+    background-color: rgb(60,60,60);
+    line-height: 17px;
+
+    img{
+      position: absolute;
+      top: 50%;
+      @include translateY(-50%);
+      left: 10px;
+    }
+
+    &.ng-enter {
+      @include transition(left 0.3s);
+      left: -100%;
+    }
+
+    &.ng-enter.ng-enter-active {
+      left: 0;
+    }
+
+    &.ng-leave {
+      @include transition(opacity 0.6s);
+      opacity: 1;
+    }
+
+    &.ng-leave.ng-leave-active {
+      opacity: 0;
+    }
+  }
+}
+
+
+
+
+
 
 
 *{
@@ -61,7 +120,146 @@ input, textarea, button {
 }
 
 pre{
+  width: 100%;
+}
+
+
+// 
+// CHECKBOX
+// 
+
+.checkbox{
   position: relative;
   float: left;
+  padding: 5px 5px 5px 5px;
+  height: auto;
   width: 100%;
+  @include userselect;
+
+  span{
+    font-size: 13px;
+  }
+
+  label{
+    position: relative;
+    display: inline-block;
+    height: 17px;
+    width: 17px;
+    vertical-align: middle;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid $w200;
+    @include transition(all, 0.3s);
+    @include bg-center;
+    cursor: pointer;
+
+    &:hover{
+      border-color: $blue1;
+    }
+  }
+
+  input{
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin:0;
+
+    &:checked + label{
+      background-color: $blue1;
+      background-image: url('../assets/done.svg');
+      border: 1px solid transparent;
+
+      & + span{
+        color: $blue1;
+      }
+    }
+    // &:focus + label{
+    //   border: 1px solid $mainGreen2;
+    // }
+  }
+}
+
+// 
+// LOADING SPINNER
+// 
+
+@keyframes spinner-animation {
+  0% { transform: rotateZ(  0deg); -webkit-animation-timing-function: cubic-bezier(0, 0, .8, .2);opacity: 1}
+ 50% { transform: rotateZ(180deg); -webkit-animation-timing-function: cubic-bezier(.2, .8, 1, 1); }
+100% { transform: rotateZ(360deg); }
+}
+
+.loading-spinner {
+  position: relative;
+  display: flex;
+  left: 0;
+  top: 0;
+  width: $Loadersize;
+  height: $Loadersize;
+  justify-content: center;
+  align-items: center;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 10; // prevent sibling elements from getting their own layers
+    top: 1px;
+    left: 0;
+    border-radius: 1em;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    border-radius: 1em;
+    border: 1px solid;
+    animation: spinner-animation 1.2s infinite;
+    animation-fill-mode: backwards;
+  }
+  &::before {
+    z-index: 2;
+    border-color: $g60 transparent transparent transparent;
+  }
+  &::after {
+    z-index: 1;
+    border-color: transparent lighten($g60, 15%) transparent transparent;
+    animation-delay: 0.6s;
+  }
+
+  &.white{
+    &::before {
+      border-color: $w230 transparent transparent transparent;
+    }
+    &::after {
+      border-color: transparent lighten($w230, 15%) transparent transparent;
+    }
+  }
+
+  &.big{
+    height: 40px;
+    width: 40px;
+
+    &::after{
+      border-width: 2px;
+      border-radius: 40px;
+    }
+    &::before{
+      border-width: 2px;
+      border-radius: 40px;
+    }
+  }
+
+  &.medium{
+    height: 30px;
+    width: 30px;
+
+    &::after{
+      border-width: 1px;
+      border-radius: 30px;
+    }
+    &::before{
+      border-width: 1px;
+      border-radius: 30px;
+    }
+  }
 }

@@ -13,7 +13,7 @@ header {
   padding: 5px 10px 5px 10px;
   align-items: center;
   z-index: 1000;
-  color: white;
+  color: #3c3c3c;
 }
 
 header img {
@@ -25,4 +25,73 @@ header span.title {
   text-align: center;
   font-weight: bold;
   font-size: 20px;
+}
+
+ng-view {
+  display: flex;
+  flex: 0 0 auto;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  padding: 30px 10px 0 10px;
+}
+
+ng-view section {
+  display: flex;
+  flex: 0 1 auto;
+  width: 500px;
+  border-radius: 2px;
+  height: auto;
+  flex-flow: column wrap;
+}
+
+ng-view section group-line {
+  display: flex;
+  height: auto;
+  margin-bottom: 10px;
+  flex-flow: row wrap;
+  border-bottom: 1px solid gainsboro;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(60, 60, 60, 0.2);
+  align-content: center;
+}
+
+ng-view section group-line line {
+  display: flex;
+  height: auto;
+  width: 100%;
+  min-height: 60px;
+  flex-flow: row wrap;
+  border-bottom: 1px solid gainsboro;
+  padding: 10px 10px 10px 20px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+ng-view section group-line line:last-child {
+  border-bottom: none;
+}
+
+ng-view section group-line line titre {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+ng-view section group-line line titre.button {
+  cursor: pointer;
+}
+
+ng-view section group-line line action-event {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 0px;
+  margin: 0;
 }

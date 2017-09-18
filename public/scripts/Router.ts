@@ -1,4 +1,5 @@
 
+
 export class RouterConfig {
 
   static $inject = ['$routeProvider', '$locationProvider'];
@@ -9,11 +10,11 @@ export class RouterConfig {
     .when('/', {
       templateUrl: '/views/home.html',
       controller: 'HomeController as $',
+      
     })
     .otherwise({
       redirectTo: '/'
     })
   }
 }
-
 MainApp.config(RouterConfig);

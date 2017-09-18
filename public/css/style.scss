@@ -19,7 +19,7 @@ header{
   padding: 5px 10px 5px 10px;
   align-items: center;
   z-index: 1000;
-  color: white;
+  color: $g60;
 
   img{
     flex: 0 0 auto;
@@ -31,6 +31,77 @@ header{
     font-size: 20px;
   }
 }
+
+
+ng-view{
+  display: flex;
+  flex: 0 0 auto;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  padding: 30px 10px 0 10px;
+
+  section{
+    display: flex;
+    flex: 0 1 auto;
+    width: 500px;
+    border-radius: 2px;
+    height: auto;
+    flex-flow: column wrap;
+
+    group-line{
+      display: flex;
+      height: auto;
+      margin-bottom: 10px;
+      flex-flow: row wrap;
+      border-bottom: 1px solid $w220;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(60,60,60,0.2);
+      align-content: center;
+
+      line{
+        display: flex;
+        height: auto;
+        width: 100%;
+        min-height: 60px;
+        flex-flow: row wrap;
+        border-bottom: 1px solid $w220;
+        padding: 10px 10px 10px 20px;
+        align-items: center;
+        font-size: 15px;
+        font-weight: bold;
+
+        &:last-child{
+          border-bottom: none;
+        }
+
+        titre{
+          display: flex;
+          height: 100%;
+          align-items: center;
+          flex: 1 1 auto;
+
+          &.button{
+            cursor: pointer;
+          }
+        }
+
+        action-event{
+          display: flex;
+          height: 100%;
+          align-items: center;
+          flex: 0 0 auto;
+          min-width: 0px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
 
 
 

@@ -1,6 +1,40 @@
+<section>
+  <group-line>
+    <line>
+      <titre class='button' ng-click='$.searchDevices()'>
+        <span ng-if='!$.deviceFound'>Rechercher un appareil</span>
+        <span ng-if='$.deviceFound'>Se deconnecter</span>
+      </titre>
+      <action-event>
+        <div ng-if="$.searching" class='loading-spinner grey'></div>
+      </action-event>
+    </line>
+  </group-line>
 
-<button type="button" 
-        class='bouton' 
-        ng-click='$.searchDevices()'>Rechercher un appareil
-</button>
-<input type="checkbox" ng-model='$.toggle' ng-change='$.toggleLight()'> Toggle
+  <div></div>
+
+  <group-line>
+
+    <line>
+      <titre>
+        <span>{{$.Controls.LED.value == 1?'Éteindre':'Allumer'}} la LED</span>
+      </titre>
+
+      <action-event>
+        <div class="ng-cloak checkbox">
+          <input id='LED' type='checkbox' ng-model='$.Controls.LED.value' ng-change='$.toggleLight()'/>
+          <label for="LED"></label>
+        </div>
+      </action-event>
+    </line>      
+      
+    <line ng-if="$.deviceFound">
+      <span>{{$.Arduino.service.device.name}}</span>
+    </line>
+  </group-line>
+  
+</section>
+
+
+
+
